@@ -87,6 +87,8 @@ imLimiar(f>65) = 1;
 figure('Name','Moedas Limiarizadas');
 imshow(imLimiar);
 
+imwrite(imLimiar,'/home/gustavo/projetosGit/PDI/imLimiar.jpg');
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
 %%%%%%%%%%%%%%%%% MOEDAS - EROSÃO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 A = imLimiar;
@@ -95,6 +97,8 @@ B = [1 1 1; 1 1 1; 1 1 1];
 EE = [1 1 1 1 1; 1 1 1 1 1; 1 1 1 1 1; 1 1 1 1 1; 1 1 1 1 1];
 
 imMoedasOpen = imopen(A, EE);
+
+imwrite(imMoedasOpen,'/home/gustavo/projetosGit/PDI/imMoedasOpen.jpg');
 
 figure('Name','Imagem Moedas Abertura');
 imshow(imMoedasOpen);
@@ -116,3 +120,5 @@ end
 
 figure('Name','Imagem Moedas Erodida')
 imshow(C)
+
+imwrite(C,'/home/gustavo/projetosGit/PDI/imMoedasErodidas.jpg');
