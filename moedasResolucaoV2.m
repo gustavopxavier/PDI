@@ -101,28 +101,39 @@ B = [1 1 1 1 1;
 
 C = A;
 
-for i=2:size(A,1)-2
-  for j=2:size(A,2)-2
-    if(A(i,j)==1) %se o pixel central da vizinhança de A = 1, deve ser analizado
-       vizA = [A(i-2,j-2) A(i-2,j-1) A(i-2,j) A(i-2,j+1) A(i-2,j+2);...
-             A(i-1,j-2) A(i-1,j-1) A(i-1,j) A(i-1,j+1) A(i-1,j+2);...
-             A(i,j-2) A(i,j-1) A(i,j) A(i,j+1) A(i,j+2);...
-             A(i+1,j-2) A(i+1,j-1) A(i+1,j) A(i+1,j+1) A(i+1,j+2);...
-             A(i+2,j-2) A(i+2,j-1) A(i+2,j) A(i+2,j+1) A(i+2,j+2)];
+for k = 1:2
+  for i=2:size(A,1)-2
+    for j=2:size(A,2)-2
+      if(A(i,j)==1) %se o pixel central da vizinhança de A = 1, deve ser analizado
+         vizA = [A(i-2,j-2) A(i-2,j-1) A(i-2,j) A(i-2,j+1) A(i-2,j+2);...
+               A(i-1,j-2) A(i-1,j-1) A(i-1,j) A(i-1,j+1) A(i-1,j+2);...
+               A(i,j-2) A(i,j-1) A(i,j) A(i,j+1) A(i,j+2);...
+               A(i+1,j-2) A(i+1,j-1) A(i+1,j) A(i+1,j+1) A(i+1,j+2);...
+               A(i+2,j-2) A(i+2,j-1) A(i+2,j) A(i+2,j+1) A(i+2,j+2)];
 %      vizA = [A(i-1,j-1) A(i-1,j) A(i-1,j+1);...
 %            A(i,j-1) A(i,j) A(i,j+1);...
 %            A(i+1,j-1) A(i+1,j) A(i+1,j+1)];
-      if (sum(sum(vizA==B))!=25) % se todos os pixels são iguais entre a vizinhança de A e B
-        C(i,j)=0;
-      end    
+        if (sum(sum(vizA==B))!=25) % se todos os pixels são iguais entre a vizinhança de A e B
+          C(i,j)=0;
+        end    
+      end
     end
   end
+  A = C;
 end
-
 figure('Name','Imagem Moedas Erodida')
 imshow(C)
 
 imwrite(C,'/home/gustavo/projetosGit/PDI/imMoedasErodidas.jpg');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+%%%%%%%%%%%%%%%%% MOEDAS - PORCENTAGEM %%%%%%%%%%%%%%%%%%%%%%%%%%%  
+
+perc = (sum(sum(C))*100)/(size(C,1)*size(C,2));
+figure('Name','Moedas - Porcentagem')
+imshow(C)
+
+title(strcat('Percentual de moedas: ',int2str(perc),' %'))
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
 %%%%%%%%%%%%%%%%% MOEDAS - ROTULANDO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
@@ -137,7 +148,7 @@ for(i=2:size(imBW,1))
   for(j=2:size(imBW,2))
     if(imBW(i,j)==1)
       if((imBW(i-1,j)==0)&&(imBW(i,j-1)==0))
-        rotulo+=20; % novo rotulo (soma de 10 em 10)
+        rotulo+=2; % novo rotulo (soma de 10 em 10)
         imRotulo(i,j)=rotulo;
       else
         if((imBW(i-1,j)==1)&&(imBW(i,j-1)==0))
