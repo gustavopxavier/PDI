@@ -183,6 +183,8 @@ end
 figure('Name','Imagem Rotulada com erros')
 imshow(uint8(imRotulo), [min(min(imRotulo)), max(max(imRotulo))])
 
+imwrite(imRotulo,'/home/gustavo/projetosGit/PDI/imRotulo.jpg');
+
 %retirar erros de equivalências de rótulos
 for(i=2:size(imRotulo,1))
   for(j=2:size(imRotulo,2))
@@ -200,3 +202,5 @@ imRotulo = uint8(imRotulo);
 figure('Name','Imagem Rotulada 2')
 imshow(imRotulo, [min(min(imRotulo)) max(max(imRotulo))])
 title(strcat('Quantidade de Moedas: ',int2str(qtdRegioes)))
+
+imwrite(imRotulo,'/home/gustavo/projetosGit/PDI/imRotuloFinal.jpg');
